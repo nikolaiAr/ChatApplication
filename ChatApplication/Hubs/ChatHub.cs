@@ -52,12 +52,14 @@ namespace ChatApplication.Hubs
                 var id = Context.ConnectionId;
                 Clients.All.onUserDisconnected(id, item.Name);
             }
-            if (0 == Users.Count)
+
+            //удалить все сообщения из базы после отключения последнего клиента
+            /*if (0 == Users.Count)
             {
                 foreach (Message current in db.Messages)
                     db.Messages.Remove(current);
                 db.SaveChanges();
-            }
+            }*/
             return base.OnDisconnected(stopCalled);
         }
     }

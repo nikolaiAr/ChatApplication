@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ChatApplication.Models.Message>
+
 @{
     Layout = null;
 }
@@ -35,15 +36,30 @@
                 <div id="history">
                     <p><b>История сообщений</b></p>
                     <table>
-                        @foreach (ChatApplication.Models.Message b in Model)
-
+                        @if (@Model.Count() > 10)
                         {
-                            <tr>
-                                <td><p><b>@b.Name</b></p></td>
-                                <td><p>@b.Text</p></td>
-                            </tr>
+                            for (int i = @Model.Count() - 10; i < @Model.Count(); i++)
+                            {
 
+                                <tr>
+                                    <td><p><b>@Model.ElementAt(i).Name:</b></p></td>
+                                    <td><p>@Model.ElementAt(i).Text</p></td>
+                                </tr>
+                            }
                         }
+                        else
+                        {
+                            foreach (ChatApplication.Models.Message curr in Model)
+
+                            {
+                                <tr>
+                                    <td><p><b>@curr.Name:</b></p></td>
+                                    <td><p>@curr.Text</p></td>
+                                </tr>
+
+                            }
+                        }
+
                     </table>
                 </div>
             </div>
